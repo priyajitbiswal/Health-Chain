@@ -15,11 +15,13 @@
    - [5. Insurer Portal — Consent Filter & Dynamic Premium](#5-insurer-portal--consent-filter--dynamic-premium)
    - [6. Claims Submission Modal](#6-claims-submission-modal)
    - [7. Policy Claims Adjudication & Audit Trail](#7-policy-claims-adjudication--audit-trail)
+   - [8. Interactive Device Spoofing & Anomaly Injection Sandbox](#8-interactive-device-spoofing--anomaly-injection-sandbox)
+   - [9. 7-Day Historical Analytics & Streak Tracker](#9-7-day-historical-analytics--streak-tracker)
 4. [Feature Guide: What You See on the Screen](#feature-guide-what-you-see-on-the-screen)
 5. [Prerequisites & Windows Setup Notice](#prerequisites--windows-setup-notice)
 6. [Quickstart: How to Run the Project](#quickstart-how-to-run-the-project)
 7. [12-Step Evaluation & Presentation Walkthrough](#12-step-evaluation--presentation-walkthrough)
-8. [Automated Testing Suite (62 Tests)](#automated-testing-suite)
+8. [Automated Testing Suite (70 Tests)](#automated-testing-suite)
 9. [Complete REST API Reference](#complete-rest-api-reference)
 10. [Troubleshooting & FAQs](#troubleshooting--faqs)
 11. [Repository Structure](#repository-structure)
@@ -215,6 +217,65 @@ This section presents the actual running application interfaces captured across 
 
 ---
 
+### 8. Interactive Device Spoofing & Anomaly Injection Sandbox
+![Interactive Device Spoofing & Anomaly Injection Sandbox](screenshots/8.png)
+
+- **What You See**:
+  - The **Interactive Anomaly Sandbox** expanded at the top of the Patient Portal with active status badge **"Live Sandbox Override Active"**.
+  - **One-Click Evaluation Presets**: Quick-test buttons for:
+    - 🟢 *Legitimate Consensus* (within <1% tolerance)
+    - 🔴 *Pedometer Shaking Fraud* (Fitbit shaken to 24,000 steps vs phone 8,100)
+    - 🔴 *Sleep Tracker Desync* (Watch 8.0h vs phone 2.5h)
+    - 🔴 *Tachycardia / HR Outlier* (Watch 145 bpm vs Fitbit 70 bpm)
+  - **Fine-Grained IoT Device Controls**: Tabs for *Mock Fitbit*, *Mock Smartwatch*, and *Mock Phone* with real-time numeric inputs and sliders for Steps, Heart Rate, Sleep Duration, and Active Calories.
+  - **Live Dynamic Synchronization**: Buttons for **"Refresh Live Telemetry"** and **"Reset to Baseline"**, with status confirming that the active portal consensus metrics and device breakdown table are dynamically driven by sandbox values.
+- **Under the Hood**:
+  - Adjusting any slider or preset immediately triggers a simulation via [`POST /api/health/simulate-validation`](file:///d:/Github/Health-Chain/backend/src/app.js).
+  - The statistical tolerance engine verifies cross-device divergence in-memory ($\pm10\%$ steps, $\pm10$ bpm HR, $\pm1.0\text{h}$ sleep) without altering on-disk files.
+  - When anti-spoofing thresholds are breached, the UI immediately locks the **"Record Hash on Blockchain"** button and displays the **Integrity Invariant** alert.
+- **Why It Matters**:
+  - Grants evaluators, hackathon judges, and instructors an interactive, hands-on testing environment to tamper with wearable data in real time and observe anti-fraud defenses react dynamically.
+
+---
+
+### 9. 7-Day Historical Analytics & Streak Tracker
+
+#### A. Step Volume Trends & 10k Milestone Underwriting
+![7-Day Step Trends and Habit Streaks](screenshots/9_1.png)
+
+- **What You See**:
+  - The **7-Day Health Analytics & Streak Tracker** module for policyholder `P001` (*Aarav Sharma*).
+  - **4 Habit Consistency Badges**:
+    - **🔥 10k Step Streak**: `1 Day` (Historical Best: `3 days` on Sep 17–19).
+    - **🌙 Sleep Streak (≥7h)**: `1 Day` (7-Day Average: `7.3h / night`).
+    - **🛡️ Consensus Score**: `86%` (`6 / 7 days verified` across all 3 devices; Sep 20 flagged as anomaly).
+    - **💎 Streak Bonus**: `+0 PTS` (Next milestone prompt: *"Reach 3 days for +50"*).
+  - **Interactive Step Volume SVG Chart**:
+    - Green dashed horizontal benchmark at **10,000 Target (10% Discount Threshold)**.
+    - Daily volume bars: `09-16` (9,417 — Blue), `09-17` (10,217 — Green), `09-18` (11,500 — Green), `09-19` (10,817 — Green), `09-20` (9,600 — Red Anomaly), `09-21` (8,210 — Blue), and `09-22` (10,427 — Green, selected).
+    - Interactive date switching: clicking any day bar immediately switches the Patient Portal to that date's telemetry.
+- **Under the Hood**:
+  - Aggregated via [`GET /api/health/:patientId/history`](file:///d:/Github/Health-Chain/backend/src/app.js) and calculated by [`backend/src/history.js`](file:///d:/Github/Health-Chain/backend/src/history.js).
+  - Applies deterministic streak bonus tiers (+50 PTS for 3-day streak, +100 PTS for 5-day streak, +150 PTS for 7-day streak).
+- **Why It Matters**:
+  - Shifts insurance wellness from isolated single-day checkpoints to sustained habit consistency, rewarding policyholders for long-term health behavior.
+
+#### B. Sleep Duration & Resting Heart Rate Correlation
+![7-Day Sleep and Resting Heart Rate Trends](screenshots/9_2.png)
+
+- **What You See**:
+  - The **"Sleep & Heart Rate"** tab within the Historical Analytics module.
+  - **Sleep Trend Curve**: A blue polyline plotting daily restorative sleep against the horizontal dashed benchmark line at **7.0h Sleep Target (5% Discount Threshold)**.
+  - **Dual-Metric Alignment**: Nightly sleep duration labeled above each node (7.1h, 7.2h, 7.8h, 7.6h, 5.8h, 6.7h, 7.4h) with corresponding daily resting heart rate in red bpm beneath each date (74 bpm, 73 bpm, 69 bpm, 70 bpm, 90 bpm, 76 bpm, 72 bpm).
+  - **Footer Summary**: Confirms a 7-day average of `7.3h sleep` and `72 bpm HR`.
+- **Under the Hood**:
+  - Dual-metric coordinate projection rendered with native SVG for zero external library weight.
+  - Exposes clinical correlation: on anomalous day `09-20`, poor sleep (5.8h) directly correlates with elevated resting heart rate (90 bpm).
+- **Why It Matters**:
+  - Proves the holistic diagnostic value of cross-referencing circadian recovery with cardiovascular stress for preventative underwriting.
+
+---
+
 ## Feature Guide: What You See on the Screen
 
 ### Patient Portal (`http://localhost:3000`)
@@ -222,8 +283,10 @@ This section presents the actual running application interfaces captured across 
 | UI Element | What It Represents | Real-World Purpose |
 | :--- | :--- | :--- |
 | **Demo Patient Selector** | Switch between `P001` (Aarav Sharma), `P002` (Priya Patel), and `P003` (Rohan Verma). | Simulates different policyholders with varying health metrics and wallet addresses. |
-| **Date Switcher** | Select between `2026-09-22`, `2026-09-21`, or `2026-09-20 (Anomaly)`. | Demonstrates consistent normal days versus an anti-fraud anomaly test day. |
+| **Date Switcher** | Select between 7 calendar days (`2026-09-16` through `2026-09-22`). | Demonstrates consistent days, historical streaks, and deliberate anti-fraud anomaly test days. |
+| **Interactive Anomaly Sandbox** | Collapsible testing panel with device sliders and 1-click fraud presets. | Enables live anti-spoofing demonstrations by dynamically testing tolerance breaches. |
 | **Daily Consensus Metrics** | Displays verified daily averages (e.g., 10,427 steps, 7.4h sleep). | Aggregated view synthesized across all active wearable devices. |
+| **7-Day Health Analytics & Streaks** | Interactive SVG charts for steps, sleep, and heart rate with streak counters. | Visualizes habit consistency, tracks 10k step streaks, and calculates wellness bonuses. |
 | **IoT Device Comparison Table** | Shows raw telemetry side-by-side: *Mock Fitbit*, *Mock Smartwatch*, *Mock Phone*. | Proves cross-device verification. If one device is spoofed or hacked, the discrepancy is exposed immediately. |
 | **Integrity Anomaly Banner** | Bright red alert showing discrepancy percentages. | Demonstrates automated rejection of tampered fitness tracking data. |
 | **Blockchain Cryptographic Proof** | Shows the 64-character canonical SHA-256 digest with **"Record Hash on Blockchain"** button. | Creates an immutable cryptographic proof on Ethereum without exposing private medical details. |
@@ -349,7 +412,7 @@ Use this sequential 12-step flow when presenting the project for an evaluation o
 
 The repository features comprehensive automated test coverage across all architectural tiers:
 
-### Run All 62 Tests from Root (One Command)
+### Run All 70 Tests from Root (One Command)
 ```powershell
 npm.cmd test
 ```
@@ -361,7 +424,7 @@ npm.cmd test
 cd blockchain
 npx.cmd hardhat test
 
-# Run 44 Backend Unit, Integration, and 12-Step E2E Tests
+# Run 52 Backend Unit, Integration, History & Anomaly Sandbox Tests
 cd backend
 npm.cmd test
 
@@ -384,6 +447,8 @@ The backend runs on `http://localhost:5000` (and is proxied transparently by Vit
 | `/api/health/:patientId` | `GET` | `patientId`, `date?` | Retrieve patient health telemetry records |
 | `/api/health/:patientId/sources` | `GET` | `patientId`, `date?` | Retrieve multi-source breakdown grouped by wearable device |
 | `/api/health/:patientId/validation` | `GET` | `patientId`, `date?` | Perform statistical tolerance checks and compute SHA-256 hash |
+| `/api/health/simulate-validation` | `POST` | `{ sources, tolerances?, patientId?, date? }` | Interactive Sandbox: simulate arbitrary IoT vitals & anti-spoofing |
+| `/api/health/:patientId/history` | `GET` | `patientId` | 7-day health trend analytics, habit streaks, and consensus integrity |
 | `/api/health/:patientId/record` | `POST` | `patientId`, `{ date }` | Validate telemetry and commit SHA-256 hash to blockchain |
 | `/api/health/:patientId/record-onchain`| `GET` | `patientId`, `date` | Query on-chain health record digest and timestamp |
 | `/api/consent` | `POST` | `{ patientId, entityAddress, granted }` | Grant or revoke entity access consent on smart contract |

@@ -90,6 +90,126 @@
     "calories": 3900
   },
   {
+    "id": "REC-019",
+    "patientId": "P001",
+    "date": "2026-09-19",
+    "source": "Mock Fitbit",
+    "steps": 10800,
+    "heartRate": 70,
+    "sleepHours": 7.6,
+    "calories": 2420
+  },
+  {
+    "id": "REC-020",
+    "patientId": "P001",
+    "date": "2026-09-19",
+    "source": "Mock Smartwatch",
+    "steps": 10750,
+    "heartRate": 72,
+    "sleepHours": 7.5,
+    "calories": 2390
+  },
+  {
+    "id": "REC-021",
+    "patientId": "P001",
+    "date": "2026-09-19",
+    "source": "Mock Phone",
+    "steps": 10900,
+    "heartRate": 69,
+    "sleepHours": 7.7,
+    "calories": 2450
+  },
+  {
+    "id": "REC-022",
+    "patientId": "P001",
+    "date": "2026-09-18",
+    "source": "Mock Fitbit",
+    "steps": 11500,
+    "heartRate": 68,
+    "sleepHours": 7.8,
+    "calories": 2520
+  },
+  {
+    "id": "REC-023",
+    "patientId": "P001",
+    "date": "2026-09-18",
+    "source": "Mock Smartwatch",
+    "steps": 11420,
+    "heartRate": 70,
+    "sleepHours": 7.7,
+    "calories": 2480
+  },
+  {
+    "id": "REC-024",
+    "patientId": "P001",
+    "date": "2026-09-18",
+    "source": "Mock Phone",
+    "steps": 11580,
+    "heartRate": 68,
+    "sleepHours": 7.9,
+    "calories": 2550
+  },
+  {
+    "id": "REC-025",
+    "patientId": "P001",
+    "date": "2026-09-17",
+    "source": "Mock Fitbit",
+    "steps": 10200,
+    "heartRate": 73,
+    "sleepHours": 7.2,
+    "calories": 2320
+  },
+  {
+    "id": "REC-026",
+    "patientId": "P001",
+    "date": "2026-09-17",
+    "source": "Mock Smartwatch",
+    "steps": 10150,
+    "heartRate": 74,
+    "sleepHours": 7.1,
+    "calories": 2300
+  },
+  {
+    "id": "REC-027",
+    "patientId": "P001",
+    "date": "2026-09-17",
+    "source": "Mock Phone",
+    "steps": 10300,
+    "heartRate": 72,
+    "sleepHours": 7.3,
+    "calories": 2350
+  },
+  {
+    "id": "REC-028",
+    "patientId": "P001",
+    "date": "2026-09-16",
+    "source": "Mock Fitbit",
+    "steps": 9400,
+    "heartRate": 74,
+    "sleepHours": 7.1,
+    "calories": 2210
+  },
+  {
+    "id": "REC-029",
+    "patientId": "P001",
+    "date": "2026-09-16",
+    "source": "Mock Smartwatch",
+    "steps": 9350,
+    "heartRate": 76,
+    "sleepHours": 7.0,
+    "calories": 2180
+  },
+  {
+    "id": "REC-030",
+    "patientId": "P001",
+    "date": "2026-09-16",
+    "source": "Mock Phone",
+    "steps": 9500,
+    "heartRate": 73,
+    "sleepHours": 7.2,
+    "calories": 2240
+  },
+  {
     "id": "REC-010",
     "patientId": "P002",
     "date": "2026-09-22",
@@ -150,6 +270,156 @@
     "calories": 2220
   },
   {
+    "id": "REC-031",
+    "patientId": "P002",
+    "date": "2026-09-20",
+    "source": "Mock Fitbit",
+    "steps": 10500,
+    "heartRate": 69,
+    "sleepHours": 7.8,
+    "calories": 2350
+  },
+  {
+    "id": "REC-032",
+    "patientId": "P002",
+    "date": "2026-09-20",
+    "source": "Mock Smartwatch",
+    "steps": 10420,
+    "heartRate": 71,
+    "sleepHours": 7.7,
+    "calories": 2320
+  },
+  {
+    "id": "REC-033",
+    "patientId": "P002",
+    "date": "2026-09-20",
+    "source": "Mock Phone",
+    "steps": 10600,
+    "heartRate": 70,
+    "sleepHours": 7.9,
+    "calories": 2380
+  },
+  {
+    "id": "REC-034",
+    "patientId": "P002",
+    "date": "2026-09-19",
+    "source": "Mock Fitbit",
+    "steps": 12100,
+    "heartRate": 67,
+    "sleepHours": 8.2,
+    "calories": 2580
+  },
+  {
+    "id": "REC-035",
+    "patientId": "P002",
+    "date": "2026-09-19",
+    "source": "Mock Smartwatch",
+    "steps": 12050,
+    "heartRate": 68,
+    "sleepHours": 8.1,
+    "calories": 2550
+  },
+  {
+    "id": "REC-036",
+    "patientId": "P002",
+    "date": "2026-09-19",
+    "source": "Mock Phone",
+    "steps": 12200,
+    "heartRate": 66,
+    "sleepHours": 8.3,
+    "calories": 2610
+  },
+  {
+    "id": "REC-037",
+    "patientId": "P002",
+    "date": "2026-09-18",
+    "source": "Mock Fitbit",
+    "steps": 11800,
+    "heartRate": 68,
+    "sleepHours": 7.9,
+    "calories": 2510
+  },
+  {
+    "id": "REC-038",
+    "patientId": "P002",
+    "date": "2026-09-18",
+    "source": "Mock Smartwatch",
+    "steps": 11720,
+    "heartRate": 70,
+    "sleepHours": 7.8,
+    "calories": 2480
+  },
+  {
+    "id": "REC-039",
+    "patientId": "P002",
+    "date": "2026-09-18",
+    "source": "Mock Phone",
+    "steps": 11900,
+    "heartRate": 67,
+    "sleepHours": 8.0,
+    "calories": 2540
+  },
+  {
+    "id": "REC-040",
+    "patientId": "P002",
+    "date": "2026-09-17",
+    "source": "Mock Fitbit",
+    "steps": 10900,
+    "heartRate": 69,
+    "sleepHours": 7.6,
+    "calories": 2420
+  },
+  {
+    "id": "REC-041",
+    "patientId": "P002",
+    "date": "2026-09-17",
+    "source": "Mock Smartwatch",
+    "steps": 10840,
+    "heartRate": 71,
+    "sleepHours": 7.5,
+    "calories": 2390
+  },
+  {
+    "id": "REC-042",
+    "patientId": "P002",
+    "date": "2026-09-17",
+    "source": "Mock Phone",
+    "steps": 11000,
+    "heartRate": 68,
+    "sleepHours": 7.7,
+    "calories": 2460
+  },
+  {
+    "id": "REC-043",
+    "patientId": "P002",
+    "date": "2026-09-16",
+    "source": "Mock Fitbit",
+    "steps": 10300,
+    "heartRate": 70,
+    "sleepHours": 7.5,
+    "calories": 2340
+  },
+  {
+    "id": "REC-044",
+    "patientId": "P002",
+    "date": "2026-09-16",
+    "source": "Mock Smartwatch",
+    "steps": 10250,
+    "heartRate": 72,
+    "sleepHours": 7.4,
+    "calories": 2310
+  },
+  {
+    "id": "REC-045",
+    "patientId": "P002",
+    "date": "2026-09-16",
+    "source": "Mock Phone",
+    "steps": 10400,
+    "heartRate": 69,
+    "sleepHours": 7.6,
+    "calories": 2380
+  },
+  {
     "id": "REC-016",
     "patientId": "P003",
     "date": "2026-09-22",
@@ -178,5 +448,185 @@
     "heartRate": 81,
     "sleepHours": 6.2,
     "calories": 1770
+  },
+  {
+    "id": "REC-046",
+    "patientId": "P003",
+    "date": "2026-09-21",
+    "source": "Mock Fitbit",
+    "steps": 4500,
+    "heartRate": 80,
+    "sleepHours": 6.3,
+    "calories": 1800
+  },
+  {
+    "id": "REC-047",
+    "patientId": "P003",
+    "date": "2026-09-21",
+    "source": "Mock Smartwatch",
+    "steps": 4450,
+    "heartRate": 82,
+    "sleepHours": 6.2,
+    "calories": 1780
+  },
+  {
+    "id": "REC-048",
+    "patientId": "P003",
+    "date": "2026-09-21",
+    "source": "Mock Phone",
+    "steps": 4600,
+    "heartRate": 79,
+    "sleepHours": 6.4,
+    "calories": 1830
+  },
+  {
+    "id": "REC-049",
+    "patientId": "P003",
+    "date": "2026-09-20",
+    "source": "Mock Fitbit",
+    "steps": 3900,
+    "heartRate": 85,
+    "sleepHours": 5.8,
+    "calories": 1690
+  },
+  {
+    "id": "REC-050",
+    "patientId": "P003",
+    "date": "2026-09-20",
+    "source": "Mock Smartwatch",
+    "steps": 3850,
+    "heartRate": 87,
+    "sleepHours": 5.7,
+    "calories": 1670
+  },
+  {
+    "id": "REC-051",
+    "patientId": "P003",
+    "date": "2026-09-20",
+    "source": "Mock Phone",
+    "steps": 4000,
+    "heartRate": 84,
+    "sleepHours": 5.9,
+    "calories": 1710
+  },
+  {
+    "id": "REC-052",
+    "patientId": "P003",
+    "date": "2026-09-19",
+    "source": "Mock Fitbit",
+    "steps": 5100,
+    "heartRate": 78,
+    "sleepHours": 6.5,
+    "calories": 1850
+  },
+  {
+    "id": "REC-053",
+    "patientId": "P003",
+    "date": "2026-09-19",
+    "source": "Mock Smartwatch",
+    "steps": 5050,
+    "heartRate": 80,
+    "sleepHours": 6.4,
+    "calories": 1820
+  },
+  {
+    "id": "REC-054",
+    "patientId": "P003",
+    "date": "2026-09-19",
+    "source": "Mock Phone",
+    "steps": 5200,
+    "heartRate": 77,
+    "sleepHours": 6.6,
+    "calories": 1880
+  },
+  {
+    "id": "REC-055",
+    "patientId": "P003",
+    "date": "2026-09-18",
+    "source": "Mock Fitbit",
+    "steps": 4800,
+    "heartRate": 81,
+    "sleepHours": 6.0,
+    "calories": 1790
+  },
+  {
+    "id": "REC-056",
+    "patientId": "P003",
+    "date": "2026-09-18",
+    "source": "Mock Smartwatch",
+    "steps": 4750,
+    "heartRate": 83,
+    "sleepHours": 5.9,
+    "calories": 1770
+  },
+  {
+    "id": "REC-057",
+    "patientId": "P003",
+    "date": "2026-09-18",
+    "source": "Mock Phone",
+    "steps": 4900,
+    "heartRate": 80,
+    "sleepHours": 6.1,
+    "calories": 1820
+  },
+  {
+    "id": "REC-058",
+    "patientId": "P003",
+    "date": "2026-09-17",
+    "source": "Mock Fitbit",
+    "steps": 4300,
+    "heartRate": 83,
+    "sleepHours": 5.9,
+    "calories": 1730
+  },
+  {
+    "id": "REC-059",
+    "patientId": "P003",
+    "date": "2026-09-17",
+    "source": "Mock Smartwatch",
+    "steps": 4250,
+    "heartRate": 85,
+    "sleepHours": 5.8,
+    "calories": 1710
+  },
+  {
+    "id": "REC-060",
+    "patientId": "P003",
+    "date": "2026-09-17",
+    "source": "Mock Phone",
+    "steps": 4400,
+    "heartRate": 82,
+    "sleepHours": 6.0,
+    "calories": 1760
+  },
+  {
+    "id": "REC-061",
+    "patientId": "P003",
+    "date": "2026-09-16",
+    "source": "Mock Fitbit",
+    "steps": 4100,
+    "heartRate": 84,
+    "sleepHours": 6.0,
+    "calories": 1700
+  },
+  {
+    "id": "REC-062",
+    "patientId": "P003",
+    "date": "2026-09-16",
+    "source": "Mock Smartwatch",
+    "steps": 4050,
+    "heartRate": 86,
+    "sleepHours": 5.9,
+    "calories": 1680
+  },
+  {
+    "id": "REC-063",
+    "patientId": "P003",
+    "date": "2026-09-16",
+    "source": "Mock Phone",
+    "steps": 4200,
+    "heartRate": 83,
+    "sleepHours": 6.1,
+    "calories": 1730
   }
 ]

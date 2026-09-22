@@ -12,8 +12,9 @@ import {
   saveNewClaim,
   updateClaimStatusInStore
 } from './dataLoader.js';
-import { validatePatientHealthData } from './validation.js';
+import { validatePatientHealthData, simulateValidation } from './validation.js';
 import { calculateWellnessReward } from './rewards.js';
+import { getPatientHistory } from './history.js';
 import blockchainService from './blockchainService.js';
 
 const app = express();
@@ -121,6 +122,54 @@ app.get('/api/health/:patientId/validation', async (req, res) => {
     });
   } catch (err) {
     res.status(500).json({ success: false, error: 'Failed to perform health data validation' });
+  }
+});
+
+// Interactive Anomaly Injection Sandbox: simulate validation on arbitrary source values
+app.post('/api/health/simulate-validation', (req, res) => {
+  const { sources, tolerances, patientId, date } = req.body;
+
+  if (!sources || !Array.isArray(sources) || sources.length === 0) {
+    return res.status(400).json({
+      success: false,
+      error: 'sources array is required in request body'
+    });
+  }
+
+  try {
+    const simulationResult = simulateValidation(sources, tolerances, patientId, date);
+    res.json({
+      success: true,
+      data: simulationResult
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      error: `Simulation validation failed: ${err.message}`
+    });
+  }
+});
+
+// Historical Analytics & Streak Tracking: retrieve 7-day trends and streak calculations
+app.get('/api/health/:patientId/history', async (req, res) => {
+  const { patientId } = req.params;
+
+  try {
+    const patient = await getPatientById(patientId);
+    if (!patient) {
+      return res.status(404).json({ success: false, error: `Patient ${patientId} not found` });
+    }
+
+    const historyData = await getPatientHistory(patientId);
+    res.json({
+      success: true,
+      data: historyData
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      error: `Failed to load historical analytics: ${err.message}`
+    });
   }
 });
 

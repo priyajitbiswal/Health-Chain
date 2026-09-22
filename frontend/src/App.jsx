@@ -7,9 +7,19 @@ import WellnessCard from './components/WellnessCard.jsx';
 import PatientSelector from './components/PatientSelector.jsx';
 import StatusBadge from './components/StatusBadge.jsx';
 import InsuranceDashboard from './components/InsuranceDashboard.jsx';
+import AnomalySandbox from './components/AnomalySandbox.jsx';
+import HealthTrends from './components/HealthTrends.jsx';
 
 const DEFAULT_INSURER = '0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC';
-const AVAILABLE_DATES = ['2026-09-22', '2026-09-21', '2026-09-20'];
+const AVAILABLE_DATES = [
+  '2026-09-22',
+  '2026-09-21',
+  '2026-09-20',
+  '2026-09-19',
+  '2026-09-18',
+  '2026-09-17',
+  '2026-09-16'
+];
 
 export default function App() {
   const [portalMode, setPortalMode] = useState('patient'); // 'patient' | 'insurer'
@@ -27,6 +37,14 @@ export default function App() {
   const [rewardPoints, setRewardPoints] = useState(0);
   const [rewardStatus, setRewardStatus] = useState(null);
   const [blockchainInfo, setBlockchainInfo] = useState(null);
+
+  // Historical analytics & streak tracking state
+  const [historyData, setHistoryData] = useState(null);
+
+  // Sandbox simulation override state
+  const [sandboxActive, setSandboxActive] = useState(false);
+  const [sandboxSources, setSandboxSources] = useState([]);
+  const [sandboxValidation, setSandboxValidation] = useState(null);
 
   // Load patients list and blockchain info once on mount
   useEffect(() => {
@@ -48,6 +66,31 @@ export default function App() {
       })
       .catch((err) => console.error('Failed to load blockchain info:', err));
   }, []);
+
+  // Fetch 7-day historical telemetry and streak analytics
+  const loadHistory = useCallback(async () => {
+    if (!selectedPatientId) return;
+    try {
+      const res = await fetch(`/api/health/${selectedPatientId}/history`);
+      const data = await res.json();
+      if (data.success) {
+        setHistoryData(data.data);
+      }
+    } catch (err) {
+      console.error('Failed to load patient history:', err);
+    }
+  }, [selectedPatientId]);
+
+  useEffect(() => {
+    loadHistory();
+  }, [loadHistory]);
+
+  // Reset sandbox override when patient or date changes
+  useEffect(() => {
+    setSandboxActive(false);
+    setSandboxSources([]);
+    setSandboxValidation(null);
+  }, [selectedPatientId, selectedDate]);
 
   // Fetch patient telemetry, validation, on-chain record, consent, and rewards
   const loadPatientData = useCallback(async () => {
@@ -186,11 +229,29 @@ export default function App() {
     }
     // Refresh accrued points and status
     await loadPatientData();
+    await loadHistory();
     return data;
   };
 
+  // Handle applying and resetting sandbox override
+  const handleApplySandbox = useCallback((sSources, simResult) => {
+    setSandboxActive(true);
+    setSandboxSources(sSources);
+    setSandboxValidation(simResult);
+  }, []);
+
+  const handleResetSandbox = useCallback(() => {
+    setSandboxActive(false);
+    setSandboxSources([]);
+    setSandboxValidation(null);
+  }, []);
+
+  // Compute active sources and validation result (sandbox overrides baseline when active)
+  const activeSources = sandboxActive && sandboxSources.length > 0 ? sandboxSources : sources;
+  const activeValidation = sandboxActive && sandboxValidation ? sandboxValidation : validationResult;
+
   const currentPatient = patients.find((p) => p.id === selectedPatientId);
-  const consensus = validationResult?.consensusMetrics;
+  const consensus = activeValidation?.consensusMetrics;
 
   return (
     <div className="container">
@@ -280,6 +341,16 @@ export default function App() {
             </div>
           )}
 
+          {/* Interactive Anomaly Injection Sandbox */}
+          <AnomalySandbox
+            baselineSources={sources}
+            onApplySandbox={handleApplySandbox}
+            onResetSandbox={handleResetSandbox}
+            isApplied={sandboxActive}
+            patientId={selectedPatientId}
+            selectedDate={selectedDate}
+          />
+
           {/* Health Metrics Dashboard */}
           <section style={{ marginBottom: '24px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
@@ -287,7 +358,7 @@ export default function App() {
                 Daily Consensus Metrics ({selectedDate})
               </h2>
               <span style={{ fontSize: '13px', color: 'var(--muted)' }}>
-                {validationResult?.validated
+                {activeValidation?.validated
                   ? 'Computed via cross-device consensus'
                   : 'Discrepancy detected between sources'}
               </span>
@@ -296,30 +367,30 @@ export default function App() {
             <div className="grid">
               <MetricCard
                 title="Daily Steps"
-                value={consensus?.steps ?? (sources[0]?.steps || null)}
+                value={consensus?.steps ?? (activeSources[0]?.steps || null)}
                 unit="steps"
                 icon="🏃"
-                subtitle={validationResult?.validated ? 'Target: ≥ 10,000 steps' : 'Unverified reading'}
+                subtitle={activeValidation?.validated ? 'Target: ≥ 10,000 steps' : 'Unverified reading'}
                 qualifiesDiscount={(consensus?.steps || 0) >= 10000}
               />
               <MetricCard
                 title="Heart Rate"
-                value={consensus?.heartRate ?? (sources[0]?.heartRate || null)}
+                value={consensus?.heartRate ?? (activeSources[0]?.heartRate || null)}
                 unit="bpm"
                 icon="💓"
                 subtitle="Resting average"
               />
               <MetricCard
                 title="Sleep Duration"
-                value={consensus?.sleepHours ?? (sources[0]?.sleepHours || null)}
+                value={consensus?.sleepHours ?? (activeSources[0]?.sleepHours || null)}
                 unit="hours"
                 icon="🌙"
-                subtitle={validationResult?.validated ? 'Target: ≥ 7.0 hours' : 'Unverified reading'}
+                subtitle={activeValidation?.validated ? 'Target: ≥ 7.0 hours' : 'Unverified reading'}
                 qualifiesDiscount={(consensus?.sleepHours || 0) >= 7.0}
               />
               <MetricCard
                 title="Active Burn"
-                value={consensus?.calories ?? (sources[0]?.calories || null)}
+                value={consensus?.calories ?? (activeSources[0]?.calories || null)}
                 unit="kcal"
                 icon="🔥"
                 subtitle="Consensus calories"
@@ -327,14 +398,21 @@ export default function App() {
             </div>
           </section>
 
+          {/* 7-Day Health Trends & Streak Analytics */}
+          <HealthTrends
+            historyData={historyData}
+            onSelectDate={setSelectedDate}
+            selectedDate={selectedDate}
+          />
+
           {/* Multi-Source Comparison */}
-          <SourceComparison sources={sources} validationResult={validationResult} />
+          <SourceComparison sources={activeSources} validationResult={activeValidation} />
 
           {/* Blockchain Record & Cryptographic Proof */}
           <BlockchainRecord
             patientId={selectedPatientId}
             date={selectedDate}
-            validationResult={validationResult}
+            validationResult={activeValidation}
             onChainRecord={onChainRecord}
             onRecordToBlockchain={handleRecordToBlockchain}
             loading={loading}

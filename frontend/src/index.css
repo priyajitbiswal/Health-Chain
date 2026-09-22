@@ -153,6 +153,16 @@ header {
   background-color: var(--primary-hover);
 }
 
+.btn-secondary {
+  border-color: var(--border);
+  background: #F8FAFC;
+  color: var(--text);
+}
+
+.btn-secondary:hover {
+  background-color: #F1F5F9;
+}
+
 .btn-outline {
   border-color: var(--border);
   background: white;
@@ -161,4 +171,21 @@ header {
 
 .btn-outline:hover {
   background-color: #F8FAFC;
+}
+
+.sandbox-control-card {
+  background: #F8FAFC;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.streak-badge-card {
+  background: #F8FAFC;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }

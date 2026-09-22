@@ -26,10 +26,11 @@ Update this file after every meaningful implementation change.
 - [x] Unit 08 — Wellness Rewards (Deterministic points calculation, idempotent claiming, UI)
 - [x] Unit 09 — End-to-End Verification (12-step demo flow suite, all tests passing, full README)
 - [x] Visual Tour & System Screenshots (Annotated walkthrough of screenshots 1–7 embedded in README)
+- [x] Unit 10 — Interactive Anomaly Sandbox & Historical Analytics (Live IoT spoofing station, real-time anti-spoofing enforcement, 7-day SVG trend charts, habit streaks, 70 automated tests)
 
 ## In Progress
 
-- None (All 9 build units complete!)
+- None (All units complete and verified!)
 
 ## Next Up
 

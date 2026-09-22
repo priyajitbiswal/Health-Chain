@@ -176,3 +176,44 @@ export async function validatePatientHealthData(patientId, date = null) {
     };
   });
 }
+
+/**
+ * Perform simulation validation on arbitrary sources and optional custom tolerances.
+ * Useful for interactive sandbox evaluation and anomaly injection.
+ * @param {Array} sources 
+ * @param {object|null} customTolerances 
+ * @param {string} patientId 
+ * @param {string} date 
+ * @returns {object}
+ */
+export function simulateValidation(sources, customTolerances = null, patientId = 'P001', date = '2026-09-22') {
+  const tolerances = customTolerances
+    ? { ...DEFAULT_TOLERANCES, ...customTolerances }
+    : DEFAULT_TOLERANCES;
+
+  const validation = validateSources(sources, tolerances);
+  let canonicalRecord = null;
+  let canonicalHash = null;
+
+  if (validation.validated) {
+    canonicalRecord = generateCanonicalRecord(
+      patientId,
+      date,
+      validation.consensusMetrics,
+      sources
+    );
+    canonicalHash = computeCanonicalHash(canonicalRecord);
+  }
+
+  return {
+    patientId,
+    date,
+    validated: validation.validated,
+    reasons: validation.reasons,
+    consensusMetrics: validation.consensusMetrics,
+    canonicalRecord,
+    canonicalHash,
+    tolerances,
+    sources
+  };
+}
